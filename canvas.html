@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>canvas</title>
+    <style type="text/css">
+        #gift{
+            width: 200px;
+            height: 120px;
+            color: orangered;
+            font-size: 35px;
+            text-align: center;
+            line-height: 40px;
+            position: absolute;
+            padding-top: 25px;
+        }
+        canvas{
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+    <div id="gift"></div>
+    <canvas id="canvas" width="200" height="100"></canvas> 
+</body>
+<script type="text/javascript">
+    var canvas=document.getElementById('canvas');
+    var context=canvas.getContext('2d');
+    var gift = document.getElementById("gift");
+//刮奖奖品等级随机显示
+    var arr = new Array();
+    arr[0] = '一等奖';
+    for(var i=1;i<3;i++){
+        arr[i] = '二等奖';
+    }
+    for(var i=3;i<5;i++){
+        arr[i] = '三等奖';
+    }
+    for(var i=5;i<11;i++){
+        arr[i] = '谢谢参与';
+    }
+    var text = arr[Math.floor(Math.random()*10)];
+    gift.innerHTML = text;
+//遮罩层
+    window.onload=function(){
+        context.beginPath();
+        context.moveTo(0,0);
+        context.lineTo(0,120);
+        context.lineTo(200,120);
+        context.lineTo(200,0);
+        context.closePath();
+        context.stroke();
+        context.fillStyle="grey";
+        context.fill();
+    }
+
+  //鼠标按下和移动时清除遮罩层  
+    canvas.onmousedown=function(e){
+        context.clearRect(e.offsetX,e.offsetY,15,15);
+        canvas.onmousemove=function(e){
+          context.clearRect(e.offsetX,e.offsetY,15,15);
+        }
+    }
+    
+    canvas.onmouseup=function(){
+        //鼠标放开不再涂抹遮罩层
+        canvas.onmousemove=function(){
+
+        }
+        var data = context.getImageData(0, 0,200,120).data;
+		var area=0;
+		for (var i=0;i<data.length;i+=4) {
+			if (data[i] == 0 && data[i + 1] == 0 && data[i + 2] == 0 && data[i + 3] == 0) {
+				area++;
+			}
+		}
+		if(area>120*200*0.85){
+            //通过删除canvas去掉遮罩层
+            document.body.removeChild(canvas);
+		}
+    }
+</script>
+</html>
