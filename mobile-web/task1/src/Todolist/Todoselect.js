@@ -3,24 +3,6 @@ import PropTypes from 'prop-types';
 import { Checkbox } from 'antd';
 
 export default class Todoselect extends Component{
-    
-    // componentDidMount(props){
-    //     console.log(props);
-    //         let todo = localStorage.getItem('todo').split(',');
-    //         let todo0 = localStorage.getItem('todo0').split(',');
-    //         console.log(todo);
-    //         console.log(todo0);
-    //         // if(localStorage.getItem('todo').split(',')[0] === ""){
-    //         //     todo.splice(0,1);
-    //         //     console.log(todo.length);
-    //         //     props.todo = todo;
-    //         //    // this.props.setState({todo:todo})
-    //         // }
-    //     //props.setState({
-    //         props.todo = todo;
-    //         props.todo0 = todo0
-    //     //})
-    // }
 
     render(){
         return (
@@ -60,7 +42,3 @@ export default class Todoselect extends Component{
 Todoselect.propTypes = {
     todo:PropTypes.array
 }
-// Todoing.defaultProp = {
-//     todo:[1,2,3],
-//     a:100
-// }
