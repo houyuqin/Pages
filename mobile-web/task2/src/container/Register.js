@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import {Link} from 'react-router-dom'
 
 export default class Register extends Component {
     render() {
@@ -8,7 +9,7 @@ export default class Register extends Component {
                 <br/>
                 密码：<input type="password" className="pwd"></input>
                 <br/>
-                <a href='/all'>登录</a>
+                <Link to='/all'>登录</Link>
             </div>
         )
     }
