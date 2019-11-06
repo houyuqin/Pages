@@ -1,9 +1,10 @@
-import React, { Component } from 'react'
-import {Link,Route} from 'react-router-dom'
-import All from './Home/All'
+import React from 'react'
 
-export default class Register extends Component {
-    render() {
+export default function Register(props){
+    function rgt(){
+        props.history.push('/all');
+    }
+
         return (
             <div>
             <div className='lgi'>
@@ -11,12 +12,9 @@ export default class Register extends Component {
                 <br/>
                 密码：<input type="password" className="pwd"></input>
                 <br/>
-                <Link to='/all'>登录</Link>
-            </div>
-            <div>
-            <Route path='/all' component={All}/>
+                <button onClick={rgt}>登录</button>
             </div>
             </div>
         )
-    }
+
 }
